@@ -27,15 +27,15 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <?php foreach ($results as $result): ?>
 
     <div class="card">
-        <div class="card__image-container">
-            <img class="card__image" src="./images/pexels-canva-studio-3153199.jpg" alt="">
-        </div>
+        <?php if (!empty($result['image'])): ?>
+            <div class="card__image-container">
+                <img class="card__image" src="uploads/<?php echo e($result['image']); ?>" alt="" />
+            </div>
+        <?php endif; ?>
         <div class="card__desc-container">
             <?php
             $dateExploded = explode('-', $result['date']);
-
             $timestamp = mktime(12, 0, 0, $dateExploded[1], $dateExploded[2], $dateExploded[0]);
-
             ?>
             <div class="card__desc-time">
                 <?= e(date('D - d/M/Y', $timestamp)); ?>
